@@ -1,0 +1,13 @@
+<button mat-raised-button (click)="newGame()">New Game</button>
+
+<mat-card style="margin-left: 20px; width: 150px"><mat-card-content><a>Moves: {{moves_amount}}</a></mat-card-content></mat-card>
+
+
+<div>
+    <app-card 
+        *ngFor="let card of cards; let i = index"
+        [value]="card.whatVisible"
+        (click)= "makeMove(i)">
+
+    </app-card>
+</div>
