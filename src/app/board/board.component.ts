@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, EventEmitter, OnInit, Output } from '@angular/core';
 import { CardComponent } from '../card/card.component';
 import { CommonModule } from "@angular/common";
 import { Card, CardsService } from '../cards.service';
@@ -20,19 +20,22 @@ export class BoardComponent{
   cards: Card[] = []
   firstGuess : Card | null = null
   secondGuess : Card | null = null
-  moves_amount : number = 0
+
+  @Output() moves_amountChange = new EventEmitter<string>();
+
+  @Input() pairs! : number;
 
   constructor(private CardService: CardsService){
 
   }
 
-  ngOnInit(){
+  ngOnChanges(){
     this.newGame()
   }
 
   newGame(){
-    this.cards = this.CardService.newShuffleCards()
-    this.moves_amount = 0
+    this.cards = this.CardService.newShuffleCards(this.pairs)
+    this.incMoveCounter("null");
     this.firstGuess = null; this.secondGuess = null
   }
 
@@ -52,16 +55,17 @@ export class BoardComponent{
 
     if(this.firstGuess?.symbol == this.secondGuess?.symbol){
       console.log("YOU WON")
-      this.moves_amount += 1
       this.firstGuess = null; this.secondGuess = null
+      this.checkVictory()
+      this.incMoveCounter("inc")
     } else if(this.secondGuess) {
       console.log("YOU FAILED")
-      this.moves_amount += 1
+      this.incMoveCounter("inc")
 
       // reset if wrong choice
       if(this.firstGuess.symbol != this.secondGuess.symbol){
 
-        setTimeout(() =>{
+        setTimeout(() => {
           
           if(this.firstGuess){this.firstGuess.whatVisible = "x"}
           if(this.secondGuess){this.secondGuess.whatVisible = "x"}
@@ -73,6 +77,21 @@ export class BoardComponent{
     }
 
   }
+  incMoveCounter(command : string){
+    this.moves_amountChange.emit(command);
+  }
+
+  checkVictory(){
+    if (this.cards.some(element => element.whatVisible === "x")) {
+        console.log("NO VICTORY");
+    } else {
+        console.log("VICTORY");
+        setTimeout(() => {
+          this.newGame()
+        }, 3000)
+    }
+}
+
 
 
 

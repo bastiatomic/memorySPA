@@ -3,4 +3,9 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: rgba(48,48,48,255);
+    color: white;
+}
+.designBorder{
+    border: 1px white solid;
+    border-radius: 10px;
 }

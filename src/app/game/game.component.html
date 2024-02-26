@@ -1,0 +1,12 @@
+<div>
+
+    <app-navbar
+    (pairs)="onPairChange($event)"
+    [moves_amount]="moves_amount">
+    </app-navbar>
+
+    <app-board
+    [pairs]="pairs"
+    (moves_amountChange)="onNewMoveCommand($event)"></app-board>
+
+</div>

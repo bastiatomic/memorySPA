@@ -1,12 +1,13 @@
 div {
-    display: grid;
-    grid-template-columns: repeat(4, 190px);
-  }
+  display: grid;
+  grid-template-columns: repeat(4, 190px);
+}
 
-  button {
-    margin: 20px;
-  }
+button {
+  margin: 20px;
+  margin-right: 40px;
+}
 
-  a{
-    color: rgb(255,255,255)
-  }
+a {
+  color: rgb(255, 255, 255);
+}

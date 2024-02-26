@@ -1,0 +1,20 @@
+<mat-card style="height: 100vh;">
+      <button mat-raised-button color="accent" (click)="newGame()">
+        New Game
+      </button>
+
+      <div class="designBorder">
+        <h3> Pairs</h3>
+        <button mat-raised-button color="accent" (click)="more_pairs('add')">
+            +
+          </button>
+          <button mat-raised-button color="accent" (click)="more_pairs('subtract')">
+            -
+          </button>
+      </div>
+  
+      
+      <mat-card-content style="color: white;">Moves: {{ moves_amount }}</mat-card-content>
+
+      <mat-card-content style="color: white;">Pairs: WIP</mat-card-content>
+  </mat-card>
