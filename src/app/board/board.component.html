@@ -1,6 +1,10 @@
-<app-card
-  *ngFor="let card of cards; let i = index"
-  [value]="card.whatVisible"
-  (click)="makeMove(i)"
->
-</app-card>
+
+<div class="grid">
+    <app-card
+    *ngFor="let card of cards; let i = index"
+    [value]="card.whatVisible"
+    (click)="makeMove(i)"
+  >
+  </app-card>
+</div>
+

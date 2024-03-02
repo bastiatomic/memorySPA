@@ -1,21 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { BoardComponent } from '../board/board.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
-  imports: [NavbarComponent, BoardComponent],
+  imports: [NavbarComponent, BoardComponent, FormsModule],
+  template: `
+    <div>
+
+      <app-navbar
+      [pairs]="pairs"
+      (pairsChange)="onPairChange($event)"
+      [moves_amount]="moves_amount"
+      (deckSwapChange)="onDeckSwapChange($event)">
+      </app-navbar>
+
+      <app-board #childComponent
+      [pairs]="pairs"
+      (moves_amountChange)="onNewMoveCommand($event)"
+      ></app-board>
+
+    </div>
+  `,
 })
+
 export class GameComponent {
   //I store all the values assocciated with one game and emit/send them to their components
 
-  pairs: number = 0;
+  @ViewChild('childComponent', { static: false }) childComponent!: BoardComponent;
+  pairs: number = 4; // global number
   moves_amount: number = 0;
+  deckSwapFactor : string = "show"
 
   onPairChange(a: number) {
+    console.log(`onPairChange()`)
     this.pairs += a;
   }
 
@@ -31,5 +52,9 @@ export class GameComponent {
         this.moves_amount -= 1;
         break;
     }
+  }
+  onDeckSwapChange(command: string){
+    this.deckSwapFactor = command;
+    this.childComponent.swapDeck(command)
   }
 }

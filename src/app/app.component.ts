@@ -6,11 +6,12 @@ import { CardComponent } from './card/card.component';
 import { BoardComponent } from './board/board.component';
 import { GameComponent } from './game/game.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, CardComponent, BoardComponent, GameComponent, NavbarComponent],
+  imports: [CommonModule, RouterOutlet, CardComponent, BoardComponent, GameComponent, NavbarComponent,FormsModule,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

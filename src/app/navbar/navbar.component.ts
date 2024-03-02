@@ -15,24 +15,28 @@ export class NavbarComponent {
 
   @Input() moves_amount : number = 0; // this value is useless?
 
-  @Output() pairs = new EventEmitter<number>();
+  @Output() pairsChange = new EventEmitter<number>();
+  @Input() pairs! : number;
 
-  ngOnInit(){
-    this.pairs.emit(4); // init value
-  }
-  
+  @Output() deckSwapChange = new EventEmitter<string>();
 
-  more_pairs(a: string){
+  morePairs(a: string){
+    console.log(`more_pairs`, a);
     if (a == 'add'){
-      this.pairs.emit(1)
+      this.pairsChange.emit(1)
     } else{
-      this.pairs.emit(-1)
+      this.pairsChange.emit(-1)
     }
     
   }
 
   newGame(){
 
+  }
+
+  deckSwap(command : string){
+    console.log("navbar > cardsControl")
+    this.deckSwapChange.emit(command)
   }
 
 }

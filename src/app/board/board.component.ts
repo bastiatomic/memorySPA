@@ -25,9 +25,7 @@ export class BoardComponent{
 
   @Input() pairs! : number;
 
-  constructor(private CardService: CardsService){
-
-  }
+  constructor(private CardService: CardsService){}
 
   ngOnChanges(){
     this.newGame()
@@ -38,6 +36,24 @@ export class BoardComponent{
     this.incMoveCounter("null");
     this.firstGuess = null; this.secondGuess = null
   }
+
+  swapDeck(command: string){
+    console.log("board > swapDeck", command)
+
+    if (command == "hide"){
+      this.cards.forEach((a) => {
+        a.whatVisible = "x"
+      })
+    } else {
+      this.cards.forEach((a) => {
+        a.whatVisible = a.symbol
+      })
+      
+    }
+    
+  }
+
+
 
   //TODO: make more return to avoid nested if()
   makeMove(index: number){
