@@ -38,7 +38,6 @@ export class BoardComponent{
   }
 
   swapDeck(command: string){
-    console.log("board > swapDeck", command)
 
     if (command == "hide"){
       this.cards.forEach((a) => {
@@ -58,7 +57,6 @@ export class BoardComponent{
   //TODO: make more return to avoid nested if()
   makeMove(index: number){
     var guess: Card = this.cards[index]
-    console.log(guess)
     
     if(!this.firstGuess){
       this.firstGuess = guess
@@ -70,12 +68,10 @@ export class BoardComponent{
     }
 
     if(this.firstGuess?.symbol == this.secondGuess?.symbol){
-      console.log("YOU WON")
       this.firstGuess = null; this.secondGuess = null
       this.checkVictory()
       this.incMoveCounter("inc")
     } else if(this.secondGuess) {
-      console.log("YOU FAILED")
       this.incMoveCounter("inc")
 
       // reset if wrong choice
@@ -99,7 +95,6 @@ export class BoardComponent{
 
   checkVictory(){
     if (this.cards.some(element => element.whatVisible === "x")) {
-        console.log("NO VICTORY");
     } else {
         console.log("VICTORY");
         setTimeout(() => {

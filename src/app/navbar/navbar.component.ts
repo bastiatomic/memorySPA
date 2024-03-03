@@ -20,23 +20,57 @@ export class NavbarComponent {
 
   @Output() deckSwapChange = new EventEmitter<string>();
 
+  TIMELEFT_DEFAULT : number = this.pairs * 2
+  timeLeft = this.TIMELEFT_DEFAULT
+  interval: string | number | NodeJS.Timeout | undefined;
+
+  ngOnInit(){
+    this.setupTimer()
+  }
+
   morePairs(a: string){
-    console.log(`more_pairs`, a);
     if (a == 'add'){
       this.pairsChange.emit(1)
     } else{
       this.pairsChange.emit(-1)
     }
+    setTimeout(()=> {
+      this.setupTimer()
+    },1)
+
     
   }
 
-  newGame(){
-
-  }
+  newGame(){}
 
   deckSwap(command : string){
-    console.log("navbar > cardsControl")
     this.deckSwapChange.emit(command)
   }
+
+  startTimer() {
+    this.deckSwap("show")
+      this.interval = setInterval(() => {
+        if(this.timeLeft > 0) {
+          this.timeLeft--;
+        } else {
+          this.resetTimer()
+          this.deckSwap("hide")
+        }
+      },1000)
+    }
+
+    pauseTimer() {
+      clearInterval(this.interval);
+    }
+
+    resetTimer(){
+      this.timeLeft = this.TIMELEFT_DEFAULT;
+      this.pauseTimer()
+    }
+    setupTimer(){
+      this.TIMELEFT_DEFAULT = this.pairs * 2;
+      this.timeLeft = this.TIMELEFT_DEFAULT;
+    }
+ 
 
 }

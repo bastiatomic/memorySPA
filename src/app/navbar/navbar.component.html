@@ -1,30 +1,48 @@
-<mat-card style="height: 100vh;">
-      <button mat-raised-button color="accent" (click)="newGame()">
-        New Game
-      </button>
+<mat-card style="height: 100vh">
+  <button
+    mat-raised-button
+    color="accent"
+    disabled="disabled"
+    (click)="newGame()"
+  >
+    New Game
+  </button>
 
-      <div class="designBorder">
-        <h3> Pairs</h3>
-        <button mat-raised-button color="accent" (click)="morePairs('add')">
-            +
-          </button>
-          <button mat-raised-button color="accent" (click)="morePairs('subtract')">
-            -
-          </button>
-      </div>
+  <div class="designBorder">
+    <h3>Pairs</h3>
+    <button mat-raised-button color="accent" (click)="morePairs('add')">
+      +
+    </button>
+    <button mat-raised-button color="accent" (click)="morePairs('subtract')">
+      -
+    </button>
+  </div>
 
-      <div class="designBorder">
-        <h3> Show/Hide all</h3>
-        <button mat-raised-button color="accent" (click)="deckSwap('show')">
-            Show
-          </button>
-          <button mat-raised-button color="accent" (click)="deckSwap('hide')">
-            Hide
-          </button>
-      </div>
-  
-      
-      <mat-card-content style="color: white;">Moves: {{ moves_amount }}</mat-card-content>
+  <div class="designBorder">
+    <h3>Show/Hide all</h3>
+    <button mat-raised-button color="accent" (click)="deckSwap('show')">
+      Show
+    </button>
+    <button mat-raised-button color="accent" (click)="deckSwap('hide')">
+      Hide
+    </button>
+  </div>
 
-      <mat-card-content style="color: white;">Pairs: {{pairs}}</mat-card-content>
-  </mat-card>
+  <div class="designBorder">
+    <h3>Timer</h3>
+
+    <button mat-raised-button color="accent" (click)="startTimer()">
+      Start
+    </button>
+    <button style="visibility: hidden" (click)="pauseTimer()">Pause</button>
+    <button style="visibility: hidden" (click)="resetTimer()">Reset</button>
+
+    <p>{{ timeLeft }} seconds left</p>
+  </div>
+
+  <mat-card-content style="color: white"
+    >Moves: {{ moves_amount }}</mat-card-content
+  >
+
+  <mat-card-content style="color: white">Pairs: {{ pairs }}</mat-card-content>
+</mat-card>

@@ -31,12 +31,11 @@ export class GameComponent {
   //I store all the values assocciated with one game and emit/send them to their components
 
   @ViewChild('childComponent', { static: false }) childComponent!: BoardComponent;
-  pairs: number = 4; // global number
+  pairs: number = 8; // init number
   moves_amount: number = 0;
   deckSwapFactor : string = "show"
 
   onPairChange(a: number) {
-    console.log(`onPairChange()`)
     this.pairs += a;
   }
 
